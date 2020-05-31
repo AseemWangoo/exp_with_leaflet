@@ -32,6 +32,9 @@ dependencies:
   # LOGGER
   logging: ^0.11.4
 
+  # API CALLS
+  http: ^0.12.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
