@@ -1,4 +1,8 @@
+import 'package:exp_with_leaflet/app_level/models/api_response.dart';
+
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong/latlong.dart';
 
 class MapUtils {
@@ -15,5 +19,25 @@ class MapUtils {
     }
 
     return _positions;
+  }
+
+  static List<Polyline> listOfPolylines(List<MapResponse> mapData) {
+    debugPrint('>>>> listOfPolylines ${mapData.length}');
+    var _polylines = <Polyline>[];
+
+    for (var mapCoordinate in mapData) {
+      var _points = mapCoordinate.geometry.coordinates.first;
+
+      _polylines.add(
+        Polyline(
+          points: polylines(_points),
+          strokeWidth: 4.0,
+          color: Colors.red,
+        ),
+      );
+    }
+    debugPrint('>>>> listOfPolylines ${_polylines.length}');
+
+    return _polylines;
   }
 }

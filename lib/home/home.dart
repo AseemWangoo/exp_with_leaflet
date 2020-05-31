@@ -30,24 +30,17 @@ class _HomeState extends State<Home> {
             if (_resp.isEmpty) {
               return child;
             }
-            debugPrint('>>>> ${_resp.first.geometry.coordinates.first.first}');
+            debugPrint(
+                'AFTER >>>> ${_resp.first.geometry.coordinates.first.first}');
 
-            final _latLng = _resp.first.geometry.coordinates.first.first;
+            final _listOfPolyLines = MapUtils.listOfPolylines(_resp);
 
-            final _polyPoints = MapUtils.polylines(
-              _resp.first.geometry.coordinates.first,
-            );
+            // final _latLng = _resp.first.geometry.coordinates.first.first;
 
             return FlutterMap(
               layers: [
                 PolylineLayerOptions(
-                  polylines: [
-                    Polyline(
-                      points: _polyPoints,
-                      strokeWidth: 4.0,
-                      color: Colors.red,
-                    ),
-                  ],
+                  polylines: _listOfPolyLines,
                 ),
                 TileLayerOptions(
                   subdomains: ['a', 'b', 'c'],
