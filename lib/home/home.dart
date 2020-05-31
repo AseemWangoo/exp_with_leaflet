@@ -30,7 +30,7 @@ class _HomeState extends State<Home> {
               ],
               options: MapOptions(
                 center: LatLng(42.553080, -86.473389),
-                zoom: 10.0,
+                zoom: 5.0, // 13.0
               ),
             ),
           ],

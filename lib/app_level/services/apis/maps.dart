@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io' show SocketException;
 
+import 'package:exp_with_leaflet/app_level/models/api_response.dart';
 import 'package:exp_with_leaflet/app_level/utilities/exception_handler.dart';
 
 import 'package:http/http.dart' as http;
@@ -24,14 +25,13 @@ class MapsService {
   }) async {
     //
     var _url = '$_baseUrl&position=$lat,$long';
-    var _values;
 
     try {
       var response = await http.get(_url);
 
-      _values = UrlChecker.checkResponse(response);
-      _serviceLogger.info(_url);
-      _serviceLogger.info(_values);
+      final _mapResponse = mapResponseFromJson(response.body);
+
+      _serviceLogger.info(_mapResponse);
       //
 
     } on SocketException {
