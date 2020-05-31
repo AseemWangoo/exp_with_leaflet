@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_single_quotes
+
 import 'dart:convert' show json;
 
 List<MapResponse> mapResponseFromJson(String str) => List<MapResponse>.from(
