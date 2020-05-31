@@ -61,7 +61,7 @@ class _MyAppState extends State<MyApp> {
       home: MultiProvider(
         providers: [
           ChangeNotifierProvider<MapsModel>(
-            create: (_) => MapsModel(),
+            create: (_) => _mapsModel,
           ),
         ],
         child: Home(),
