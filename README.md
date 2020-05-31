@@ -1,16 +1,27 @@
 # exp_with_leaflet
 
-Hands on with leaflet
+Hands on with leaflet 👻👻👻
 
-## Getting Started
+### Getting Started 🎯🎯
 
-This project is a starting point for a Flutter application.
+- Download the repo
+- Make sure you are on the Flutter Stable Channel
+- Install dependencies, when asked, after downloading the project.
+- Run the cmd 
 
-A few resources to get you started if this is your first Flutter project:
+```
+flutter run
+```
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+- You should see the app working at this point..
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+```yaml
+dependencies:
+  fimber: ^0.4.2
+  ```
+- remember about import in file you plan to use Fimber 
+
+```dart
+import 'package:fimber/fimber.dart';
+
+```

@@ -20,9 +20,10 @@ void main() async {
   }
 
   // LOGGING
-  Logger.root.level = Level.ALL;
   Logger.root.onRecord.listen((record) {
-    print('👻👻👻 ${record.level.name}: 🎯🎯 ${record.message}');
+    print(
+      '👻👻👻 ${record.level.name} [${record.loggerName}] : 🎯🎯 ${record.message}',
+    );
   });
 
   runApp(MyApp());
