@@ -8,13 +8,11 @@ class MapUtils {
     var _positions = <LatLng>[];
 
     for (var position in points) {
-      final _latitude = position.first;
-      final _longitude = position.last;
+      final _latitude = position.first.clamp(-90.0, 90.0);
+      final _longitude = position.last.clamp(-180.0, 180.0);
 
       _positions.add(LatLng(_latitude, _longitude));
     }
-
-    debugPrint('>>>>> ${_positions.length}');
 
     return _positions;
   }

@@ -34,11 +34,21 @@ class _HomeState extends State<Home> {
 
             final _latLng = _resp.first.geometry.coordinates.first.first;
 
-            MapUtils.polylines(_resp.first.geometry.coordinates.first);
+            final _polyPoints = MapUtils.polylines(
+              _resp.first.geometry.coordinates.first,
+            );
 
             return FlutterMap(
               layers: [
-                PolylineLayerOptions(),
+                PolylineLayerOptions(
+                  polylines: [
+                    Polyline(
+                      points: _polyPoints,
+                      strokeWidth: 4.0,
+                      color: Colors.red,
+                    ),
+                  ],
+                ),
                 TileLayerOptions(
                   subdomains: ['a', 'b', 'c'],
                   urlTemplate:
@@ -46,7 +56,7 @@ class _HomeState extends State<Home> {
                 ),
               ],
               options: MapOptions(
-                center: LatLng(_latLng.first, _latLng.last),
+                center: LatLng(48.427920, -123.358090),
                 zoom: 13.0,
               ),
             );
@@ -60,8 +70,8 @@ class _HomeState extends State<Home> {
               ),
             ],
             options: MapOptions(
-              center: LatLng(42.553080, -86.473389),
-              zoom: 5.0, // 13.0
+              center: LatLng(48.427920, -123.358090),
+              zoom: 13.0, // 13.0
             ),
           ),
         ),

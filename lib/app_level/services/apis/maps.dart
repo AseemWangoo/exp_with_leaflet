@@ -19,8 +19,8 @@ class MapsService {
   static final _serviceLogger = Logger('MapsService');
 
   Future<List<MapResponse>> _getRoute({
-    double lat = 42.553080,
-    double long = -86.473389,
+    double lat = 48.427920,
+    double long = -123.358090,
   }) async {
     //
     var _url = '$_baseUrl&position=$lat,$long';
@@ -30,6 +30,7 @@ class MapsService {
 
       final _mapResponse = mapResponseFromJson(response.body);
 
+      _serviceLogger.info(_url);
       _serviceLogger.info(_mapResponse);
       //
 
