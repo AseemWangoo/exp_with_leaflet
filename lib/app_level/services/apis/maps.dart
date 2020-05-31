@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:io' show SocketException;
 
 import 'package:exp_with_leaflet/app_level/models/api_response.dart';
@@ -13,13 +12,13 @@ class MapsService {
   final String _baseUrl =
       'https://native-land.ca/api/index.php?maps=languages,territories,treaties';
 
-  Future<void> getRoute() => _getRoute();
+  Future<List<MapResponse>> getRoute() => _getRoute();
 
   // --------------------------------------------- INTERNALS ---------------------------------------------
 
   static final _serviceLogger = Logger('MapsService');
 
-  Future<void> _getRoute({
+  Future<List<MapResponse>> _getRoute({
     double lat = 42.553080,
     double long = -86.473389,
   }) async {
@@ -34,11 +33,14 @@ class MapsService {
       _serviceLogger.info(_mapResponse);
       //
 
+      return _mapResponse;
     } on SocketException {
       throw FetchDataException('No Internet connection');
     } catch (exc) {
       _serviceLogger.severe(exc.toString());
     }
+
+    return <MapResponse>[];
   }
 }
 
@@ -49,11 +51,11 @@ class UrlChecker {
 }
 
 dynamic _checkResponse(http.Response resp) {
-  final _body = resp.body.toString();
+  final _body = resp.body;
 
   switch (resp.statusCode) {
     case 200:
-      var _resp = jsonDecode(resp.body);
+      var _resp = _body;
       return _resp;
 
     case 400:

@@ -1,8 +1,4 @@
-// To parse this JSON data, do
-//
-//     final mapResponse = mapResponseFromJson(jsonString);
-
-import 'dart:convert';
+import 'dart:convert' show json;
 
 List<MapResponse> mapResponseFromJson(String str) => List<MapResponse>.from(
     json.decode(str).map((x) => MapResponse.fromJson(x)));
