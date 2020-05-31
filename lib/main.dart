@@ -38,9 +38,18 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  MapsModel _mapsModel;
+
   @override
   void initState() {
     super.initState();
+    _mapsModel = MapsModel();
+    _init();
+  }
+
+  Future<void> _init() async {
+    // ANY INIT BEFORE BUILD, WRITE HERE...
+    await _mapsModel.initRoute;
   }
 
   @override
