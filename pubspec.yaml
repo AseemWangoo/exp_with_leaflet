@@ -22,12 +22,15 @@ dependencies:
   flutter:
     sdk: flutter
 
+  # MAPS
+  flutter_map: ^0.9.0
+
   # DEPENDENCY INJECTION
   get_it: ^4.0.2
   provider: ^4.1.2
 
-  # MAPS
-  flutter_map: ^0.9.0
+  # LOGGER
+  logging: ^0.11.4
 
 dev_dependencies:
   flutter_test:
