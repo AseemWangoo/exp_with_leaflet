@@ -1,6 +1,6 @@
 # exp_with_leaflet
 
-A new Flutter project.
+Hands on with leaflet
 
 ## Getting Started
 

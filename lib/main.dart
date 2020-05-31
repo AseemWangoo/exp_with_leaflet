@@ -1,42 +1,29 @@
-import 'package:flutter/material.dart';
+import 'package:exp_with_leaflet/app_level/routes/routes.dart';
+import 'package:exp_with_leaflet/app_level/theme/theme.dart';
 
-void main() {
+import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // SETUP ORIENTATION
+  if (!kIsWeb) {
+    await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  }
+
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    //
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: MyHomePage(),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key}) : super(key: key);
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  Widget build(BuildContext context) {
-    //
-
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Exp with leaflet'),
-      ),
-      body: Center(
-        child: Text('Hii'),
-      ),
+      onGenerateRoute: Router.generateRoute,
+      theme: AppTheme.appTheme,
     );
   }
 }
