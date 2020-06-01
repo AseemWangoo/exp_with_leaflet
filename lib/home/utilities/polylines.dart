@@ -1,3 +1,4 @@
+import 'package:exp_with_leaflet/app_level/extensions/color_extension.dart';
 import 'package:exp_with_leaflet/app_level/models/api_response.dart';
 
 import 'package:flutter/material.dart';
@@ -22,16 +23,17 @@ class MapUtils {
 
     for (var mapCoordinate in mapData) {
       var _points = mapCoordinate.geometry.coordinates.first;
+      var _props = mapCoordinate.properties.color;
+      var _color = HexColor.fromHex(_props);
 
       _polylines.add(
         Polyline(
           points: polylines(_points),
           strokeWidth: 1.0,
-          color: Colors.red,
+          color: _color,
         ),
       );
     }
-    debugPrint('>>>> listOfPolylines ${_polylines.length}');
 
     return _polylines;
   }

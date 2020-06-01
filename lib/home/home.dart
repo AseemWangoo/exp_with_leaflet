@@ -43,18 +43,13 @@ class _HomeState extends State<Home> {
             return FlutterMap(
               options: MapOptions(
                 center: LatLng(48.427920, -123.358090),
-                zoom: 10.0,
+                zoom: 8.0,
               ),
               layers: [
                 TileLayerOptions(
-                    urlTemplate:
-                        'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-                    subdomains: ['a', 'b', 'c']),
-                PolylineLayerOptions(
-                  polylines: [
-                    Polyline(
-                        points: points, strokeWidth: 4.0, color: Colors.purple),
-                  ],
+                  urlTemplate:
+                      'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                  subdomains: ['a', 'b', 'c'],
                 ),
                 PolylineLayerOptions(
                   polylines: _listOfPolyLines,
