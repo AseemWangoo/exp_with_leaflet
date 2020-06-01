@@ -42,6 +42,8 @@ class _HomeState extends State<Home> {
 
             // final _latLng = _resp.first.geometry.coordinates.first.first;
 
+            final _markers = MapUtils.listOfMarkers();
+
             return FlutterMap(
               options: MapOptions(
                 center: LatLng(51.5, -0.09),
@@ -61,6 +63,7 @@ class _HomeState extends State<Home> {
                 PolylineLayerOptions(
                   polylines: _listOfPolyLines,
                 ),
+                MarkerLayerOptions(markers: _markers)
               ],
             );
           },

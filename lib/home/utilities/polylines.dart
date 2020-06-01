@@ -47,4 +47,19 @@ class MapUtils {
 
     return _polylines;
   }
+
+  static List<Marker> listOfMarkers() {
+    final _markers = [
+      Marker(
+        width: 80.0,
+        height: 80.0,
+        point: LatLng(48.393896, -123.618061),
+        builder: (ctx) => Container(
+          child: FlutterLogo(),
+        ),
+      ),
+    ];
+
+    return _markers;
+  }
 }
