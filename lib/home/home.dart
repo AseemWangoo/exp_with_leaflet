@@ -35,14 +35,10 @@ class _HomeState extends State<Home> {
             if (_resp.isEmpty) {
               return Center(child: CircularProgressIndicator());
             }
-            debugPrint(
-                'AFTER >>>> ${_resp.first.geometry.coordinates.first.first}');
 
             final _listOfPolyLines = MapUtils.listOfPolylines(_resp);
 
-            // final _latLng = _resp.first.geometry.coordinates.first.first;
-
-            final _markers = MapUtils.listOfMarkers();
+            final _markers = MapUtils.listOfMarkers(_resp);
 
             return FlutterMap(
               options: MapOptions(

@@ -48,18 +48,39 @@ class MapUtils {
     return _polylines;
   }
 
-  static List<Marker> listOfMarkers() {
-    final _markers = [
-      Marker(
-        width: 80.0,
-        height: 80.0,
-        point: LatLng(48.393896, -123.618061),
-        builder: (ctx) => Container(
-          child: FlutterLogo(),
-        ),
-      ),
-    ];
+  static List<Marker> listOfMarkers(List<MapResponse> mapData) {
+    var _coords = <LatLng>[];
+    var _mapMarkers = <Marker>[];
 
-    return _markers;
+    for (var mapCoordinate in mapData) {
+      var _points = mapCoordinate.geometry.coordinates.first.first;
+      debugPrint('>>>>> _markers $_points');
+
+      if (_points.length == 3) {
+        _coords.add(LatLng(_points[1], _points.first));
+        _mapMarkers.add(
+          Marker(
+            width: 80.0,
+            height: 80.0,
+            point: LatLng(_points[1], _points.first),
+            builder: (ctx) => FlutterLogo(),
+          ),
+        );
+      } else {
+        _coords.add(LatLng(_points.last, _points.first));
+        _mapMarkers.add(
+          Marker(
+            width: 80.0,
+            height: 80.0,
+            point: LatLng(_points.last, _points.first),
+            builder: (ctx) => FlutterLogo(),
+          ),
+        );
+      }
+    }
+    debugPrint('>>>>> _markers $_coords');
+    debugPrint('>>>>> _markers $_mapMarkers');
+
+    return _mapMarkers;
   }
 }
