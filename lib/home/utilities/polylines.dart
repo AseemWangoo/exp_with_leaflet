@@ -49,38 +49,32 @@ class MapUtils {
   }
 
   static List<Marker> listOfMarkers(List<MapResponse> mapData) {
-    var _coords = <LatLng>[];
     var _mapMarkers = <Marker>[];
 
     for (var mapCoordinate in mapData) {
       var _points = mapCoordinate.geometry.coordinates.first.first;
-      debugPrint('>>>>> _markers $_points');
+      debugPrint('c  _markers $_points');
 
-      if (_points.length == 3) {
-        _coords.add(LatLng(_points[1], _points.first));
-        _mapMarkers.add(
-          Marker(
-            width: 80.0,
-            height: 80.0,
-            point: LatLng(_points[1], _points.first),
-            builder: (ctx) => FlutterLogo(),
-          ),
-        );
-      } else {
-        _coords.add(LatLng(_points.last, _points.first));
-        _mapMarkers.add(
-          Marker(
-            width: 80.0,
-            height: 80.0,
-            point: LatLng(_points.last, _points.first),
-            builder: (ctx) => FlutterLogo(),
-          ),
-        );
-      }
+      _mapMarkers.add(
+        Marker(
+          width: 80.0,
+          height: 80.0,
+          point: validator(_points),
+          builder: (ctx) => FlutterLogo(),
+        ),
+      );
+
+      debugPrint('>>>>> POINT ${validator(_points)}');
     }
-    debugPrint('>>>>> _markers $_coords');
-    debugPrint('>>>>> _markers $_mapMarkers');
 
     return _mapMarkers;
+  }
+
+  static LatLng validator(List<double> points) {
+    if (points.length == 3) {
+      return LatLng(points[1], points.first);
+    } else {
+      return LatLng(points.last, points.first);
+    }
   }
 }
