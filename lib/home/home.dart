@@ -42,8 +42,8 @@ class _HomeState extends State<Home> {
 
             return FlutterMap(
               options: MapOptions(
-                center: LatLng(51.5, -0.09),
-                zoom: 5.0,
+                center: LatLng(48.427920, -123.358090),
+                zoom: 10.0,
               ),
               layers: [
                 TileLayerOptions(
