@@ -17,6 +17,11 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     //
+    var points = <LatLng>[
+      LatLng(51.5, -0.09),
+      LatLng(53.3498, -6.2603),
+      LatLng(48.8566, 2.3522),
+    ];
 
     return Scaffold(
       appBar: AppBar(title: Text('Exp with leaflet')),
@@ -38,20 +43,25 @@ class _HomeState extends State<Home> {
             // final _latLng = _resp.first.geometry.coordinates.first.first;
 
             return FlutterMap(
+              options: MapOptions(
+                center: LatLng(51.5, -0.09),
+                zoom: 5.0,
+              ),
               layers: [
+                TileLayerOptions(
+                    urlTemplate:
+                        'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                    subdomains: ['a', 'b', 'c']),
+                PolylineLayerOptions(
+                  polylines: [
+                    Polyline(
+                        points: points, strokeWidth: 4.0, color: Colors.purple),
+                  ],
+                ),
                 PolylineLayerOptions(
                   polylines: _listOfPolyLines,
                 ),
-                TileLayerOptions(
-                  subdomains: ['a', 'b', 'c'],
-                  urlTemplate:
-                      'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-                ),
               ],
-              options: MapOptions(
-                center: LatLng(48.427920, -123.358090),
-                zoom: 13.0,
-              ),
             );
           },
           child: FlutterMap(

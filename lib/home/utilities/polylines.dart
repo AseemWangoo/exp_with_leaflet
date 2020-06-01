@@ -40,11 +40,6 @@ class MapUtils {
           points: polylines(_points),
           strokeWidth: 4.0,
           color: Colors.red,
-          gradientColors: [
-            Color(0xffE40203),
-            Color(0xffFEED00),
-            Color(0xff007E2D),
-          ],
         ),
       );
     }
