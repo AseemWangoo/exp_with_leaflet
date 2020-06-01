@@ -28,7 +28,7 @@ class _HomeState extends State<Home> {
             debugPrint('>>>> ${_resp.length}');
 
             if (_resp.isEmpty) {
-              return child;
+              return Center(child: CircularProgressIndicator());
             }
             debugPrint(
                 'AFTER >>>> ${_resp.first.geometry.coordinates.first.first}');

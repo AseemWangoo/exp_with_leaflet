@@ -12,8 +12,16 @@ class MapUtils {
     var _positions = <LatLng>[];
 
     for (var position in points) {
-      final _latitude = position.first.clamp(-90.0, 90.0);
-      final _longitude = position.last.clamp(-180.0, 180.0);
+      var _latitude = 0.0;
+      var _longitude = 0.0;
+
+      if (position.length == 3) {
+        _latitude = position.first.clamp(-90.0, 90.0);
+        _longitude = position[1].clamp(-180.0, 180.0);
+      } else {
+        _latitude = position.first.clamp(-90.0, 90.0);
+        _longitude = position.last.clamp(-180.0, 180.0);
+      }
 
       _positions.add(LatLng(_latitude, _longitude));
     }
@@ -22,7 +30,6 @@ class MapUtils {
   }
 
   static List<Polyline> listOfPolylines(List<MapResponse> mapData) {
-    debugPrint('>>>> listOfPolylines ${mapData.length}');
     var _polylines = <Polyline>[];
 
     for (var mapCoordinate in mapData) {
@@ -33,6 +40,11 @@ class MapUtils {
           points: polylines(_points),
           strokeWidth: 4.0,
           color: Colors.red,
+          gradientColors: [
+            Color(0xffE40203),
+            Color(0xffFEED00),
+            Color(0xff007E2D),
+          ],
         ),
       );
     }
