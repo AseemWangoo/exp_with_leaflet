@@ -17,14 +17,9 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     //
-    var points = <LatLng>[
-      LatLng(51.5, -0.09),
-      LatLng(53.3498, -6.2603),
-      LatLng(48.8566, 2.3522),
-    ];
 
     return Scaffold(
-      appBar: AppBar(title: Text('Exp with leaflet')),
+      appBar: AppBar(title: const Text('Exp with leaflet')),
       body: SafeArea(
         child: Consumer<MapsModel>(
           builder: (_, model, child) {

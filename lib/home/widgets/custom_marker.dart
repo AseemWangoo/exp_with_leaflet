@@ -23,6 +23,19 @@ class _InternalWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Image.asset(AppAssets.marker.assetName);
+    //
+
+    return Stack(
+      fit: StackFit.expand,
+      overflow: Overflow.visible,
+      children: <Widget>[
+        Image.asset(AppAssets.marker.assetName),
+        Positioned(
+          left: 10.0,
+          bottom: -30.0,
+          child: FlutterLogo(),
+        )
+      ],
+    );
   }
 }

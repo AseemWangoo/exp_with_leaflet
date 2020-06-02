@@ -1,4 +1,3 @@
-import 'package:exp_with_leaflet/app_level/assets/assets.dart';
 import 'package:exp_with_leaflet/app_level/extensions/color_extension.dart';
 import 'package:exp_with_leaflet/app_level/models/api_response.dart';
 import 'package:exp_with_leaflet/home/widgets/custom_marker.dart';
