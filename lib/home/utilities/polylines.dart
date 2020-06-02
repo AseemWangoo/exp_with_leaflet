@@ -1,6 +1,7 @@
 import 'package:exp_with_leaflet/app_level/assets/assets.dart';
 import 'package:exp_with_leaflet/app_level/extensions/color_extension.dart';
 import 'package:exp_with_leaflet/app_level/models/api_response.dart';
+import 'package:exp_with_leaflet/home/widgets/custom_marker.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -47,12 +48,13 @@ class MapUtils {
       debugPrint('c  _markers $_points');
 
       _mapMarkers.add(
-        Marker(
-          width: 50.0,
-          height: 50.0,
-          point: validator(_points),
-          builder: (_) => Image.asset(AppAssets.marker.assetName),
-        ),
+        // Marker(
+        //   width: 50.0,
+        //   height: 50.0,
+        //   point: validator(_points),
+        //   builder: (_) => Image.asset(AppAssets.marker.assetName),
+        // ),
+        CustomMarker(position: validator(_points)),
       );
 
       debugPrint('>>>>> POINT ${validator(_points)}');
