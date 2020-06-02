@@ -1,3 +1,4 @@
+import 'package:exp_with_leaflet/app_level/assets/assets.dart';
 import 'package:exp_with_leaflet/app_level/extensions/color_extension.dart';
 import 'package:exp_with_leaflet/app_level/models/api_response.dart';
 
@@ -47,10 +48,10 @@ class MapUtils {
 
       _mapMarkers.add(
         Marker(
-          width: 80.0,
-          height: 80.0,
+          width: 50.0,
+          height: 50.0,
           point: validator(_points),
-          builder: (ctx) => FlutterLogo(),
+          builder: (_) => Image.asset(AppAssets.marker.assetName),
         ),
       );
 
