@@ -58,6 +58,7 @@ class MapUtils {
         // ),
         CustomMarker(
           color: _color,
+          data: mapCoordinate.properties,
           position: validator(_points),
         ),
       );
