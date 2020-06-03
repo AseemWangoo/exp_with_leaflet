@@ -1,5 +1,6 @@
 import 'package:exp_with_leaflet/home/models/maps_model.dart';
 import 'package:exp_with_leaflet/home/utilities/polylines.dart';
+import 'package:exp_with_leaflet/splash/splash.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_map/flutter_map.dart';
@@ -25,10 +26,9 @@ class _HomeState extends State<Home> {
           builder: (_, model, child) {
             //
             final _resp = model.initResponse;
-            debugPrint('>>>> ${_resp.length}');
 
             if (_resp.isEmpty) {
-              return Center(child: CircularProgressIndicator());
+              return SplashScreen();
             }
 
             final _listOfPolyLines = MapUtils.listOfPolylines(_resp);
