@@ -1,5 +1,7 @@
 import 'package:exp_with_leaflet/app_level/assets/assets.dart';
 import 'package:exp_with_leaflet/app_level/models/api_response.dart';
+import 'package:exp_with_leaflet/app_level/widgets/column_spacer.dart';
+import 'package:exp_with_leaflet/home/widgets/custom_dialog.dart';
 
 import 'package:flutter/material.dart';
 
@@ -23,23 +25,40 @@ class CustomMarker extends Marker {
 }
 
 class _InternalWidget extends StatelessWidget {
-  const _InternalWidget({Key key, this.color, this.data}) : super(key: key);
+  _InternalWidget({Key key, this.color, Properties data})
+      : _data = data,
+        super(key: key);
 
   final Color color;
-  final Properties data;
+  final Properties _data;
 
   @override
   Widget build(BuildContext context) {
     //
+
+    final _widget = ColumnSpacer(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: <Widget>[
+        Text('Name : ${_data.name}'),
+        Text('Desc : ${_data.description}'),
+        Text('Slug : ${_data.slug}'),
+        Text('French Name : ${_data.frenchName}'),
+        Text('French Desc : ${_data.frenchDescription}'),
+      ],
+    );
 
     return GestureDetector(
       child: Image.asset(
         AppAssets.marker.assetName,
         color: color,
       ),
-      onTap: () {
-        debugPrint('I was tapped');
-      },
+      onTap: () async => showDialog(
+        context: context,
+        builder: (_) => PlaceDialog(
+          title: _data.name,
+          desc: _widget,
+        ),
+      ),
     );
   }
 }

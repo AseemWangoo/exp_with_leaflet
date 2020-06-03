@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class PlaceDialog extends StatelessWidget {
   const PlaceDialog(
       {Key key,
-      String desc = 'Here comes the desc',
+      Widget desc = const Text('Hii'),
       String title = 'Title',
       String actionButtonText = 'OK'})
       : _desc = desc,
@@ -12,7 +12,7 @@ class PlaceDialog extends StatelessWidget {
         super(key: key);
 
   final String _actionButtonText;
-  final String _desc;
+  final Widget _desc;
   final String _title;
 
   @override
@@ -21,7 +21,7 @@ class PlaceDialog extends StatelessWidget {
 
     return AlertDialog(
       title: Text(_title),
-      content: Text(_desc),
+      content: _desc,
       actions: [
         FlatButton(
           child: Text(_actionButtonText),
