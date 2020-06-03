@@ -46,6 +46,9 @@ class MapUtils {
       var _points = mapCoordinate.geometry.coordinates.first.first;
       debugPrint('c  _markers $_points');
 
+      var _props = mapCoordinate.properties.color;
+      var _color = HexColor.fromHex(_props);
+
       _mapMarkers.add(
         // Marker(
         //   width: 50.0,
@@ -53,7 +56,10 @@ class MapUtils {
         //   point: validator(_points),
         //   builder: (_) => Image.asset(AppAssets.marker.assetName),
         // ),
-        CustomMarker(position: validator(_points)),
+        CustomMarker(
+          color: _color,
+          position: validator(_points),
+        ),
       );
 
       debugPrint('>>>>> POINT ${validator(_points)}');
