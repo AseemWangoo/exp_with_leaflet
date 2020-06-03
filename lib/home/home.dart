@@ -1,4 +1,5 @@
 import 'package:exp_with_leaflet/home/models/maps_model.dart';
+import 'package:exp_with_leaflet/home/utilities/constants.dart';
 import 'package:exp_with_leaflet/home/utilities/polylines.dart';
 import 'package:exp_with_leaflet/splash/splash.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +21,7 @@ class _HomeState extends State<Home> {
     //
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Exp with leaflet')),
+      appBar: AppBar(title: const Text(HomeConstants.homeTitle)),
       body: SafeArea(
         child: Consumer<MapsModel>(
           builder: (_, model, child) {
@@ -28,7 +29,7 @@ class _HomeState extends State<Home> {
             final _resp = model.initResponse;
 
             if (_resp.isEmpty) {
-              return SplashScreen();
+              return child;
             }
 
             final _listOfPolyLines = MapUtils.listOfPolylines(_resp);
@@ -42,30 +43,15 @@ class _HomeState extends State<Home> {
               ),
               layers: [
                 TileLayerOptions(
-                  urlTemplate:
-                      'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-                  subdomains: ['a', 'b', 'c'],
+                  urlTemplate: HomeConstants.mapUrl,
+                  subdomains: HomeConstants.mapDomain,
                 ),
-                PolylineLayerOptions(
-                  polylines: _listOfPolyLines,
-                ),
+                PolylineLayerOptions(polylines: _listOfPolyLines),
                 MarkerLayerOptions(markers: _markers)
               ],
             );
           },
-          child: FlutterMap(
-            layers: [
-              TileLayerOptions(
-                subdomains: ['a', 'b', 'c'],
-                urlTemplate:
-                    'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-              ),
-            ],
-            options: MapOptions(
-              center: LatLng(48.427920, -123.358090),
-              zoom: 13.0, // 13.0
-            ),
-          ),
+          child: const SplashScreen(),
         ),
       ),
     );
