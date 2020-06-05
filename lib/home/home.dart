@@ -70,12 +70,13 @@ class _HomeState extends State<Home> {
         icon: const Icon(Icons.location_on),
         label: const Text(HomeConstants.showPoints),
         onPressed: () {
-          final _latLng =
-              MapUtils.fetchInitRespPoints(_mapService.initResponse);
+          final _latLng = MapUtils.fetchInitRespPoints(
+            _mapService.initResponse,
+          );
           var _bounds = LatLngBounds();
 
-          for (var item in _latLng) {
-            _bounds.extend(item);
+          for (var _pos in _latLng) {
+            _bounds.extend(_pos);
           }
           mapController.fitBounds(
             _bounds,
