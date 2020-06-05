@@ -69,6 +69,17 @@ class MapUtils {
     return _mapMarkers;
   }
 
+  static List<LatLng> fetchInitRespPoints(List<MapResponse> mapData) {
+    var _latLng = <LatLng>[];
+
+    for (var mapCoordinate in mapData) {
+      var _points = mapCoordinate.geometry.coordinates.first.first;
+      _latLng.add(validator(_points));
+    }
+
+    return _latLng;
+  }
+
   static LatLng validator(List<double> points) {
     if (points.length == 3) {
       return LatLng(points[1], points.first);

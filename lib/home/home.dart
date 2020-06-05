@@ -16,6 +16,16 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  MapController mapController;
+
+  MapsModel get _mapService => Provider.of<MapsModel>(context, listen: false);
+
+  @override
+  void initState() {
+    super.initState();
+    mapController = MapController();
+  }
+
   @override
   Widget build(BuildContext context) {
     //
@@ -37,10 +47,6 @@ class _HomeState extends State<Home> {
             final _markers = MapUtils.listOfMarkers(_resp);
 
             return FlutterMap(
-              options: MapOptions(
-                center: LatLng(48.427920, -123.358090),
-                zoom: 8.0,
-              ),
               layers: [
                 TileLayerOptions(
                   urlTemplate: HomeConstants.mapUrl,
@@ -49,10 +55,35 @@ class _HomeState extends State<Home> {
                 PolylineLayerOptions(polylines: _listOfPolyLines),
                 MarkerLayerOptions(markers: _markers)
               ],
+              options: MapOptions(
+                center: LatLng(48.427920, -123.358090),
+                zoom: 8.0,
+              ),
+              mapController: mapController,
             );
           },
           child: const SplashScreen(),
         ),
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        backgroundColor: Colors.blue,
+        icon: const Icon(Icons.location_on),
+        label: const Text(HomeConstants.showPoints),
+        onPressed: () {
+          final _latLng =
+              MapUtils.fetchInitRespPoints(_mapService.initResponse);
+          var _bounds = LatLngBounds();
+
+          for (var item in _latLng) {
+            _bounds.extend(item);
+          }
+          mapController.fitBounds(
+            _bounds,
+            options: FitBoundsOptions(
+              padding: const EdgeInsets.symmetric(horizontal: 18.0),
+            ),
+          );
+        },
       ),
     );
   }

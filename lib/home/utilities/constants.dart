@@ -7,4 +7,6 @@ class HomeConstants {
       'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 
   static const List<String> mapDomain = ['a', 'b', 'c'];
+
+  static const String showPoints = 'Locations';
 }
