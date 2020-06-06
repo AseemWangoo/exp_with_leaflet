@@ -28,12 +28,14 @@ class _HomeState extends State<Home> {
 
   final _streamController = locator<LocationService>().locationController;
 
+  StreamSubscription<UserCurrentLocation> _locationSubscription;
+
   UserCurrentLocation _currLocation = UserCurrentLocation(
     latitude: 48.427920,
     longitude: -123.358090,
   );
 
-  UserCurrentLocation _defLocation = UserCurrentLocation(
+  final _defLocation = UserCurrentLocation(
     latitude: 48.427920,
     longitude: -123.358090,
   );
@@ -42,7 +44,7 @@ class _HomeState extends State<Home> {
   void initState() {
     super.initState();
     mapController = MapController();
-    _streamController.stream.listen((event) {
+    _locationSubscription = _streamController.stream.listen((event) {
       debugPrint('IAM RUNNING NOW ${event.latitude} ${event.longitude}');
       _currLocation = event;
     });
@@ -100,6 +102,27 @@ class _HomeState extends State<Home> {
             currentButton: FloatingActionButton(
               backgroundColor: Colors.blue,
               onPressed: () {
+                mapController.move(
+                  LatLng(_defLocation.latitude, _defLocation.longitude),
+                  8.0,
+                );
+                _locationSubscription.pause();
+              },
+              heroTag: 'third',
+              child: const Icon(Icons.pause),
+              tooltip: 'Pause Tracking',
+            ),
+          ),
+          UnicornButton(
+            currentButton: FloatingActionButton(
+              backgroundColor: Colors.blue,
+              onPressed: () {
+                final _isStreamPaused = _locationSubscription.isPaused;
+
+                if (_isStreamPaused) {
+                  _locationSubscription.resume();
+                }
+
                 mapController.move(
                   LatLng(_currLocation.latitude, _currLocation.longitude),
                   8.0,
@@ -163,6 +186,7 @@ class _HomeState extends State<Home> {
 
   @override
   void dispose() {
+    _locationSubscription?.cancel();
     _streamController?.close();
     super.dispose();
   }

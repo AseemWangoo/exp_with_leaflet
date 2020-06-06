@@ -27,12 +27,7 @@ class MapsService {
 
     try {
       var response = await http.get(_url);
-
       final _mapResponse = mapResponseFromJson(response.body);
-
-      _serviceLogger.info(_url);
-      _serviceLogger.info(_mapResponse);
-      //
 
       return _mapResponse;
     } on SocketException {
