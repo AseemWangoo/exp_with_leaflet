@@ -2,7 +2,6 @@ import 'package:exp_with_leaflet/app_level/extensions/color_extension.dart';
 import 'package:exp_with_leaflet/app_level/models/api_response.dart';
 import 'package:exp_with_leaflet/home/widgets/custom_marker.dart';
 
-import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong/latlong.dart';
 
@@ -44,26 +43,17 @@ class MapUtils {
 
     for (var mapCoordinate in mapData) {
       var _points = mapCoordinate.geometry.coordinates.first.first;
-      debugPrint('c  _markers $_points');
 
       var _props = mapCoordinate.properties.color;
       var _color = HexColor.fromHex(_props);
 
       _mapMarkers.add(
-        // Marker(
-        //   width: 50.0,
-        //   height: 50.0,
-        //   point: validator(_points),
-        //   builder: (_) => Image.asset(AppAssets.marker.assetName),
-        // ),
         CustomMarker(
           color: _color,
           data: mapCoordinate.properties,
           position: validator(_points),
         ),
       );
-
-      debugPrint('>>>>> POINT ${validator(_points)}');
     }
 
     return _mapMarkers;

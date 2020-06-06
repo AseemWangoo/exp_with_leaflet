@@ -23,9 +23,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   MapController mapController;
-
   MapsModel get _mapService => Provider.of<MapsModel>(context, listen: false);
-
   final _streamController = locator<LocationService>().locationController;
 
   StreamSubscription<UserCurrentLocation> _locationSubscription;
@@ -65,13 +63,11 @@ class _HomeState extends State<Home> {
           builder: (_, model, child) {
             //
             final _resp = model.initResponse;
-
             if (_resp.isEmpty) {
               return child;
             }
 
             final _listOfPolyLines = MapUtils.listOfPolylines(_resp);
-
             final _markers = MapUtils.listOfMarkers(_resp);
 
             return FlutterMap(
@@ -84,7 +80,7 @@ class _HomeState extends State<Home> {
                 MarkerLayerOptions(markers: _markers)
               ],
               options: MapOptions(
-                center: LatLng(48.427920, -123.358090),
+                center: LatLng(_defLocation.latitude, _defLocation.longitude),
                 zoom: 8.0,
               ),
               mapController: mapController,
