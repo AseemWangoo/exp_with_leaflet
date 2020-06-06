@@ -46,10 +46,6 @@ class _HomeState extends State<Home> {
       debugPrint('IAM RUNNING NOW ${event.latitude} ${event.longitude}');
       _currLocation = event;
     });
-
-    _streamController.onPause = () {
-      debugPrint('IAM PAUSED NOW');
-    };
   }
 
   @override
