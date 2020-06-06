@@ -24,7 +24,8 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   MapController mapController;
   MapsModel get _mapService => Provider.of<MapsModel>(context, listen: false);
-  final _streamController = locator<LocationService>().locationController;
+  // final _streamController = locator<LocationService>().locationController;
+  final _stream = locator<LocationService>().locationStream;
 
   StreamSubscription<UserCurrentLocation> _locationSubscription;
 
@@ -42,7 +43,7 @@ class _HomeState extends State<Home> {
   void initState() {
     super.initState();
     mapController = MapController();
-    _locationSubscription = _streamController.stream.listen((event) {
+    _locationSubscription = _stream.listen((event) {
       debugPrint('IAM RUNNING NOW ${event.latitude} ${event.longitude}');
       _currLocation = event;
     });
@@ -163,7 +164,6 @@ class _HomeState extends State<Home> {
   @override
   void dispose() {
     _locationSubscription?.cancel();
-    _streamController?.close();
     super.dispose();
   }
 }
