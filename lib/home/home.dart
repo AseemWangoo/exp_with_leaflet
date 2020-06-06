@@ -104,10 +104,12 @@ class _HomeState extends State<Home> {
                 );
                 _locationSubscription.pause();
               },
-              heroTag: 'third',
+              heroTag: HomeConstants.pauseTracking,
               child: const Icon(Icons.pause),
-              tooltip: 'Pause Tracking',
+              tooltip: HomeConstants.pauseTracking,
             ),
+            hasLabel: true,
+            labelText: HomeConstants.pauseTracking,
           ),
           UnicornButton(
             currentButton: FloatingActionButton(
@@ -124,10 +126,12 @@ class _HomeState extends State<Home> {
                   8.0,
                 );
               },
-              heroTag: 'second',
+              heroTag: HomeConstants.currLocation,
               child: const Icon(Icons.location_on),
-              tooltip: 'Current Location',
+              tooltip: HomeConstants.currLocation,
             ),
+            hasLabel: true,
+            labelText: HomeConstants.currLocation,
           ),
           UnicornButton(
             currentButton: FloatingActionButton(
@@ -148,35 +152,15 @@ class _HomeState extends State<Home> {
                   ),
                 );
               },
-              heroTag: 'first',
-              child: const Icon(Icons.place),
-              tooltip: 'Show offices',
+              heroTag: HomeConstants.showOffices,
+              child: const Icon(Icons.location_city),
+              tooltip: HomeConstants.showOffices,
             ),
+            hasLabel: true,
+            labelText: HomeConstants.showOffices,
           ),
         ],
       ),
-      // floatingActionButton:
-      // FloatingActionButton.extended(
-      //   backgroundColor: Colors.blue,
-      //   icon: const Icon(Icons.location_on),
-      //   label: const Text(HomeConstants.showPoints),
-      //   onPressed: () {
-      //     final _latLng = MapUtils.fetchInitRespPoints(
-      //       _mapService.initResponse,
-      //     );
-      //     var _bounds = LatLngBounds();
-
-      //     for (var _pos in _latLng) {
-      //       _bounds.extend(_pos);
-      //     }
-      //     mapController.fitBounds(
-      //       _bounds,
-      //       options: FitBoundsOptions(
-      //         padding: const EdgeInsets.symmetric(horizontal: 18.0),
-      //       ),
-      //     );
-      //   },
-      // ),
     );
   }
 

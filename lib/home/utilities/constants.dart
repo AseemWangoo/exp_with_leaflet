@@ -9,4 +9,8 @@ class HomeConstants {
   static const List<String> mapDomain = ['a', 'b', 'c'];
 
   static const String showPoints = 'Locations';
+
+  static const String pauseTracking = 'Pause Tracking';
+  static const String currLocation = 'Current Location';
+  static const String showOffices = 'Show offices';
 }
