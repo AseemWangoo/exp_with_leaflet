@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:exp_with_leaflet/app_level/models/curr_location.dart';
 import 'package:flutter/rendering.dart';
 import 'package:location/location.dart';
 
@@ -14,6 +17,10 @@ class LocationService {
 
   LatLng get currentLatLng => _currentLatLng;
 
+  Stream<UserCurrentLocation> get locationStream => locationController.stream;
+  StreamController<UserCurrentLocation> locationController =
+      StreamController<UserCurrentLocation>();
+
   // --------------------------------------------- INTERNALS ---------------------------------------------
 
   final Location _location;
@@ -26,6 +33,11 @@ class LocationService {
       debugPrint('CURRE LOCATION ${current.toString()}');
       _currentLatLng.latitude = current?.latitude;
       _currentLatLng.longitude = current?.longitude;
+
+      locationController.add(UserCurrentLocation(
+        latitude: current?.latitude,
+        longitude: current?.longitude,
+      ));
     } catch (exc) {
       _locationServiceLogger.severe(exc.toString());
     }

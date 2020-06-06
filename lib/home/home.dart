@@ -1,6 +1,11 @@
+import 'dart:async';
+
+import 'package:exp_with_leaflet/app_level/models/curr_location.dart';
+import 'package:exp_with_leaflet/app_level/services/locations/location_service.dart';
 import 'package:exp_with_leaflet/home/models/maps_model.dart';
 import 'package:exp_with_leaflet/home/utilities/constants.dart';
 import 'package:exp_with_leaflet/home/utilities/polylines.dart';
+import 'package:exp_with_leaflet/locator.dart';
 import 'package:exp_with_leaflet/splash/splash.dart';
 import 'package:flutter/material.dart';
 
@@ -20,10 +25,17 @@ class _HomeState extends State<Home> {
 
   MapsModel get _mapService => Provider.of<MapsModel>(context, listen: false);
 
+  final _streamController = locator<LocationService>().locationController;
+
   @override
   void initState() {
     super.initState();
     mapController = MapController();
+    // _streamController.stream.listen((event) {
+    //   debugPrint('>>STREAM ${event.latitude}');
+    // });
+
+    // _streamController.onPause = () {};
   }
 
   @override
@@ -87,5 +99,11 @@ class _HomeState extends State<Home> {
         },
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _streamController?.close();
+    super.dispose();
   }
 }

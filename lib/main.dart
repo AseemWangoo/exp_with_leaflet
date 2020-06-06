@@ -1,5 +1,4 @@
 import 'package:exp_with_leaflet/app_level/routes/routes.dart';
-import 'package:exp_with_leaflet/app_level/services/locations/location_service.dart';
 import 'package:exp_with_leaflet/app_level/theme/theme.dart';
 import 'package:exp_with_leaflet/home/home.dart';
 import 'package:exp_with_leaflet/home/models/maps_model.dart';
@@ -40,8 +39,6 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   MapsModel _mapsModel;
-
-  final _locationService = locator<LocationService>();
 
   @override
   void initState() {
