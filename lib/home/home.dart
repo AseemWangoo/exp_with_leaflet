@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong/latlong.dart';
 import 'package:provider/provider.dart';
+import 'package:unicorndial/unicorndial.dart';
 
 class Home extends StatefulWidget {
   Home({Key key}) : super(key: key);
@@ -27,15 +28,28 @@ class _HomeState extends State<Home> {
 
   final _streamController = locator<LocationService>().locationController;
 
+  UserCurrentLocation _currLocation = UserCurrentLocation(
+    latitude: 48.427920,
+    longitude: -123.358090,
+  );
+
+  UserCurrentLocation _defLocation = UserCurrentLocation(
+    latitude: 48.427920,
+    longitude: -123.358090,
+  );
+
   @override
   void initState() {
     super.initState();
     mapController = MapController();
-    // _streamController.stream.listen((event) {
-    //   debugPrint('>>STREAM ${event.latitude}');
-    // });
+    _streamController.stream.listen((event) {
+      debugPrint('IAM RUNNING NOW ${event.latitude} ${event.longitude}');
+      _currLocation = event;
+    });
 
-    // _streamController.onPause = () {};
+    _streamController.onPause = () {
+      debugPrint('IAM PAUSED NOW');
+    };
   }
 
   @override
@@ -77,27 +91,73 @@ class _HomeState extends State<Home> {
           child: const SplashScreen(),
         ),
       ),
-      floatingActionButton: FloatingActionButton.extended(
-        backgroundColor: Colors.blue,
-        icon: const Icon(Icons.location_on),
-        label: const Text(HomeConstants.showPoints),
-        onPressed: () {
-          final _latLng = MapUtils.fetchInitRespPoints(
-            _mapService.initResponse,
-          );
-          var _bounds = LatLngBounds();
-
-          for (var _pos in _latLng) {
-            _bounds.extend(_pos);
-          }
-          mapController.fitBounds(
-            _bounds,
-            options: FitBoundsOptions(
-              padding: const EdgeInsets.symmetric(horizontal: 18.0),
+      floatingActionButton: UnicornDialer(
+        backgroundColor: Color.fromRGBO(255, 255, 255, 0.6),
+        parentButtonBackground: Colors.redAccent,
+        parentButton: const Icon(Icons.menu),
+        childButtons: <UnicornButton>[
+          UnicornButton(
+            currentButton: FloatingActionButton(
+              backgroundColor: Colors.blue,
+              onPressed: () {
+                mapController.move(
+                  LatLng(_currLocation.latitude, _currLocation.longitude),
+                  8.0,
+                );
+              },
+              heroTag: 'second',
+              child: const Icon(Icons.location_on),
+              tooltip: 'Current Location',
             ),
-          );
-        },
+          ),
+          UnicornButton(
+            currentButton: FloatingActionButton(
+              backgroundColor: Colors.blue,
+              onPressed: () {
+                final _latLng = MapUtils.fetchInitRespPoints(
+                  _mapService.initResponse,
+                );
+                var _bounds = LatLngBounds();
+
+                for (var _pos in _latLng) {
+                  _bounds.extend(_pos);
+                }
+                mapController.fitBounds(
+                  _bounds,
+                  options: FitBoundsOptions(
+                    padding: const EdgeInsets.symmetric(horizontal: 18.0),
+                  ),
+                );
+              },
+              heroTag: 'first',
+              child: const Icon(Icons.place),
+              tooltip: 'Show offices',
+            ),
+          ),
+        ],
       ),
+      // floatingActionButton:
+      // FloatingActionButton.extended(
+      //   backgroundColor: Colors.blue,
+      //   icon: const Icon(Icons.location_on),
+      //   label: const Text(HomeConstants.showPoints),
+      //   onPressed: () {
+      //     final _latLng = MapUtils.fetchInitRespPoints(
+      //       _mapService.initResponse,
+      //     );
+      //     var _bounds = LatLngBounds();
+
+      //     for (var _pos in _latLng) {
+      //       _bounds.extend(_pos);
+      //     }
+      //     mapController.fitBounds(
+      //       _bounds,
+      //       options: FitBoundsOptions(
+      //         padding: const EdgeInsets.symmetric(horizontal: 18.0),
+      //       ),
+      //     );
+      //   },
+      // ),
     );
   }
 
