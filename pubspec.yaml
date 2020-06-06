@@ -35,6 +35,9 @@ dependencies:
   # API CALLS
   http: ^0.12.1
 
+  # LOCATION
+  location: ^3.0.2
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

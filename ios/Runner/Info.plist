@@ -24,6 +24,12 @@
 	<true/>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
+	
+	<key>NSLocationAlwaysUsageDescription</key>	
+	<string>For updating location in real time</string>	
+	<key>NSLocationWhenInUseUsageDescription</key>	
+	<string>To get the active location</string>	
+
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UISupportedInterfaceOrientations</key>
