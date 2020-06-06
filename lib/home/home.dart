@@ -42,10 +42,7 @@ class _HomeState extends State<Home> {
   void initState() {
     super.initState();
     mapController = MapController();
-    _locationSubscription = _stream.listen((event) {
-      debugPrint('IAM RUNNING NOW ${event.latitude} ${event.longitude}');
-      _currLocation = event;
-    });
+    _locationSubscription = _stream.listen((event) => _currLocation = event);
   }
 
   @override

@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:exp_with_leaflet/app_level/models/curr_location.dart';
-import 'package:flutter/rendering.dart';
 import 'package:location/location.dart';
 
 import 'package:logging/logging.dart';
@@ -30,7 +29,6 @@ class LocationService {
   void _onChanged(LocationData current) {
     try {
       //
-      debugPrint('CURRE LOCATION ${current.toString()}');
       _currentLatLng.latitude = current?.latitude;
       _currentLatLng.longitude = current?.longitude;
 
