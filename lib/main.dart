@@ -1,42 +1,72 @@
-import 'package:flutter/material.dart';
+import 'package:exp_with_leaflet/app_level/routes/routes.dart';
+import 'package:exp_with_leaflet/app_level/theme/theme.dart';
+import 'package:exp_with_leaflet/home/home.dart';
+import 'package:exp_with_leaflet/home/models/maps_model.dart';
+import 'package:exp_with_leaflet/locator.dart';
 
-void main() {
+import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
+import 'package:logging/logging.dart';
+import 'package:provider/provider.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // INIT DEP INJECTION..
+  setupLocator();
+
+  // SETUP ORIENTATION
+  if (!kIsWeb) {
+    await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  }
+
+  // LOGGING
+  Logger.root.onRecord.listen((record) {
+    print(
+      '👻👻👻 ${record.level.name} [${record.loggerName}] : 🎯🎯 ${record.message}',
+    );
+  });
+
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: MyHomePage(),
-    );
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  MapsModel _mapsModel;
+
+  @override
+  void initState() {
+    super.initState();
+    _mapsModel = MapsModel();
+    _init();
   }
-}
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key}) : super(key: key);
+  Future<void> _init() async {
+    // ANY INIT BEFORE BUILD, WRITE HERE...
+    await _mapsModel.initRoute;
+  }
 
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     //
-
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Exp with leaflet'),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      onGenerateRoute: Router.generateRoute,
+      home: MultiProvider(
+        providers: [
+          ChangeNotifierProvider<MapsModel>(
+            create: (_) => _mapsModel,
+          ),
+        ],
+        child: Home(),
       ),
-      body: Center(
-        child: Text('Hii'),
-      ),
+      theme: AppTheme.appTheme,
     );
   }
 }
