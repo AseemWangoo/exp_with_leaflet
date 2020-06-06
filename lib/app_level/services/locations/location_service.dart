@@ -17,15 +17,15 @@ class LocationService {
 
   LatLng get currentLatLng => _currentLatLng;
 
-  Stream<UserCurrentLocation> get locationStream => locationController.stream;
-  StreamController<UserCurrentLocation> locationController =
-      StreamController<UserCurrentLocation>();
+  Stream<UserCurrentLocation> get locationStream => _locationController.stream;
 
   // --------------------------------------------- INTERNALS ---------------------------------------------
 
   final Location _location;
   LatLng _currentLatLng;
   static final _locationServiceLogger = Logger('LocationService');
+
+  final _locationController = StreamController<UserCurrentLocation>();
 
   void _onChanged(LocationData current) {
     try {
@@ -34,7 +34,7 @@ class LocationService {
       _currentLatLng.latitude = current?.latitude;
       _currentLatLng.longitude = current?.longitude;
 
-      locationController.add(UserCurrentLocation(
+      _locationController.add(UserCurrentLocation(
         latitude: current?.latitude,
         longitude: current?.longitude,
       ));

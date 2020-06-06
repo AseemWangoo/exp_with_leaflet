@@ -24,7 +24,6 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   MapController mapController;
   MapsModel get _mapService => Provider.of<MapsModel>(context, listen: false);
-  // final _streamController = locator<LocationService>().locationController;
   final _stream = locator<LocationService>().locationStream;
 
   StreamSubscription<UserCurrentLocation> _locationSubscription;
