@@ -6,6 +6,7 @@ import 'package:latlong/latlong.dart';
 
 class LocationService {
   LocationService() : _location = Location() {
+    _currentLatLng = LatLng(0.0, 0.0);
     _location.onLocationChanged.listen(_onChanged);
   }
 
@@ -23,11 +24,10 @@ class LocationService {
     try {
       //
       debugPrint('CURRE LOCATION ${current.toString()}');
-      _currentLatLng.latitude = current.latitude;
-      _currentLatLng.longitude = current.longitude;
+      _currentLatLng.latitude = current?.latitude;
+      _currentLatLng.longitude = current?.longitude;
     } catch (exc) {
       _locationServiceLogger.severe(exc.toString());
     }
-    return null;
   }
 }
