@@ -11,26 +11,24 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: CHECKOUT (Step 1)
-      - uses: actions/checkout@v1
+      - name: Checkout (Step 1)
+        uses: actions/checkout@v1
 
-      - name: SETUP JAVA (Step 2)
-      - uses: actions/setup-java@v1
+      - name: Setup Java (Step 2)
+        uses: actions/setup-java@v1
         with:
           java-version: "12.x"
 
-      - name: FLUTTER STABLE CHANNEL (Step 3)
-      - uses: subosito/flutter-action@v1
+      - name: Flutter Stable Channel (Step 3)
+        uses: subosito/flutter-action@v1
         with:
           channel: "stable"
 
-      - name: FLUTTER PACKAGES GET (Step 4)
       - run: flutter pub get
 
-      - name: FLUTTER BUILD (Step 5)
       - run: flutter build appbundle --release
 
-      - name: Archive Flutter Android Artifact (Step 6)
+      - name: Archive Flutter Android Artifact (Step 4)
         uses: actions/upload-artifact@master
         with:
           name: apk-release
