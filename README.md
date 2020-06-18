@@ -1,5 +1,7 @@
 # exp_with_leaflet
 
+[![Flutter Leaflet and CD](https://github.com/AseemWangoo/exp_with_leaflet/workflows/Flutter%20Leaflet%20and%20CD/badge.svg)](https://github.com/AseemWangoo/exp_with_leaflet/actions)
+
 Hands on with leaflet 👻👻👻
 
 ### Getting Started 🎯🎯
