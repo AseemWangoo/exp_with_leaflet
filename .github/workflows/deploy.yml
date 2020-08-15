@@ -33,3 +33,10 @@ jobs:
         with:
           name: apk-release
           path: build/app/outputs/bundle/release
+
+      # NEW STEP
+      - name: Create a Release APK
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: "build/app/outputs/bundle/release/*.aab"
+          token: ${{ secrets.TOKEN }}
